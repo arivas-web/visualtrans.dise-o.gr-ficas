@@ -17,8 +17,9 @@ Se habla con Claude Code y se pide lo que haga falta, o con el comando:
 /disenar banner de LinkedIn de empresa, look mar y contenedores, 3 opciones
 ```
 
-El agente entiende el encargo, elige estilo y formato, genera la imagen, la ajusta al tamaño
-final y la entrega en el chat con el enlace. Lo hecho queda en `output/registro.csv`.
+El agente entiende el encargo, elige estilo y formato, lo manda a generar con el Magnific del
+compañero (rutina `agente-diseno`), y cuando vuelve entrega en el chat el enlace a la imagen. Lo
+hecho queda en `output/AAAA-MM/disenos.csv` y en `output/registro.csv`.
 
 ## Estructura
 
@@ -34,15 +35,20 @@ input/                                ← lo que LEE el agente
 ├── formatos/Formatos.md              ← tamaño, proporción y canal por tipo de pieza
 └── inbox/INBOX.md                    ← novedades de diseño (se apuntan con fecha)
 output/
+├── AAAA-MM/encargos-para-graficas.txt ← piezas sueltas pendientes (entrada de la rutina)
+├── AAAA-MM/disenos.csv               ← resultado de la rutina: enlace y estado por pieza
 └── registro.csv                      ← cada pieza generada: tema, prompt, enlace, estado
 .claude/
 ├── commands/disenar.md               ← agente de diseño general
+├── commands/generar-disenos.md       ← lo corre la rutina agente-diseno con los encargos
 ├── commands/generar-graficas.md      ← lote mensual de LinkedIn (copia)
 ├── agents/agente-disenador.md        ← genera cualquier pieza
 ├── agents/subagente-noticias.md      ← posts de LinkedIn pilar Noticia (copia)
 └── agents/subagente-pains.md         ← posts de LinkedIn pilar Pain (copia)
 docs/graficas-linkedin.md             ← cómo funciona el flujo de LinkedIn y la copia
+docs/disenos-rutina.md                ← piezas sueltas con la rutina del compañero (y su alta)
 .github/workflows/lanzar-graficas.yml ← disparo de la rutina del compañero (copia)
+.github/workflows/lanzar-disenos.yml  ← disparo de la rutina agente-diseno del compañero
 ```
 
 ## Añadir un tipo de pieza nuevo
@@ -53,6 +59,11 @@ docs/graficas-linkedin.md             ← cómo funciona el flujo de LinkedIn y 
 
 ## Créditos de Magnific
 
-Las piezas se generan con el Magnific de la sesión. Si no tiene créditos, el agente entrega los
-prompts listos para lanzarlos donde los haya. Los posts del calendario de LinkedIn siguen yendo
-por la rutina `agente-graficas` del compañero (ver `docs/graficas-linkedin.md`).
+Todo sale con el Magnific del compañero, no con el de la sesión:
+
+- **Piezas sueltas** (`/disenar`): rutina `agente-diseno`, con este repo como fuente
+  (`docs/disenos-rutina.md`, incluida la puesta en marcha).
+- **Posts del calendario de LinkedIn**: rutina `agente-graficas` (`docs/graficas-linkedin.md`).
+
+Solo si se pide expresamente se usa el Magnific de la sesión; si no tiene créditos, el agente
+entrega los prompts listos para lanzarlos donde los haya.

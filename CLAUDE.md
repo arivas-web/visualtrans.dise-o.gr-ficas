@@ -14,6 +14,11 @@ Agente de diseño gráfico de Visual Trans / Visual MS. Lee `README.md` primero.
   (copia del repo `arivas-web/visualtrans.linkedin`; detalle en `docs/graficas-linkedin.md`).
   En producción lo corre la rutina `agente-graficas` del compañero, con sus créditos. Antes de
   dispararla, confirma con el usuario.
+- **Las piezas sueltas de `/disenar` se generan con la rutina `agente-diseno` del compañero (su
+  Magnific y sus créditos), no con el Magnific de esta sesión**: bloque nuevo al final de
+  `output/AAAA-MM/encargos-para-graficas.txt` + push a `main`, que dispara
+  `.github/workflows/lanzar-disenos.yml`; el resultado llega en `output/AAAA-MM/disenos.csv`.
+  Detalle en `docs/disenos-rutina.md`. Antes de dispararla, confirma con el usuario.
 - Nunca inventes enlaces de imagen ni marques `OK` sin imagen real. Entrega siempre el enlace en
   el chat, no solo rutas. Más de 10 piezas → artifact con galería.
 - Información nueva del usuario sobre diseño: a `input/inbox/INBOX.md` con fecha delante.

@@ -43,36 +43,44 @@ Posts de LinkedIn **del calendario mensual o de un post suelto del repo de Linke
 por la rutina del compañero (`/generar-graficas`, `docs/graficas-linkedin.md`), no por aquí,
 salvo que el usuario pida expresamente hacerlo aquí.
 
-## 2. Créditos
+## 2. Generar con la rutina del compañero
 
-Mira `account_balance` de Magnific. Si no da para todo, dilo antes de empezar y genera por orden
-de prioridad hasta donde llegue; lo demás queda `pendiente` con su prompt ya escrito. Si da 0,
-no generes: entrega los prompts listos (con proporción y modelo) para lanzarlos donde haya
-créditos y dilo claramente.
+Las imágenes **nunca** se generan con el Magnific de esta sesión: salen con la rutina
+`agente-diseno` (cuenta y créditos de un compañero), que dispara
+`.github/workflows/lanzar-disenos.yml` (ver `docs/disenos-rutina.md`). No consultes
+`account_balance` ni invoques aquí a `agente-disenador`.
 
-## 3. Generar
+1. **Confirma** con el usuario antes de lanzarlo, en una frase y sin tecnicismos (los créditos son
+   de otra persona): qué piezas, en qué formato y cuántas variantes. Si dice que no, entrégale los
+   prompts listos (proporción y modelo) y para.
+2. Añade **al final** de `output/AAAA-MM/encargos-para-graficas.txt` (mes de hoy; créalo si no
+   existe) un bloque por pieza con el formato de `docs/disenos-rutina.md`: ID nuevo
+   `D-AAAA-MM-DD-tema`, `TIPO`, `CANAL`, `FORMATO` (de la tabla), `ESTILO`, `VARIANTES`, `TEMA`
+   y, si los hay, `REFERENCIAS` y `NOTAS`. Nunca en un archivo aparte.
+3. Commit y push a `main` de ese TXT (mensaje: `Encargo de diseño AAAA-MM-DD: N piezas (tema)`),
+   sin `--force` ni `--no-verify`. El push dispara el workflow.
+4. Dile al usuario algo corto ("Vale, está en marcha, te aviso cuando la tenga") y **espera al
+   resultado**: la rutina sube a `main` un commit `Diseños AAAA-MM: ...` con las filas de esos
+   IDs en `output/AAAA-MM/disenos.csv` (y en `output/registro.csv`). Haz `git pull` cada pocos
+   minutos (sin `sleep` en primer plano) hasta que todas estén en `OK` o `error`, durante unos 40
+   minutos como mucho.
+5. Si alguna sale `error`, falla el workflow (pestaña Actions) o no llega nada a tiempo, díselo
+   con el detalle técnico (motivo del CSV, error del workflow) y pregunta cómo seguir.
 
-- 1-3 piezas: invoca `agente-disenador` una vez con todas.
-- Más de 3: varios `agente-disenador` en paralelo (unas 4 piezas cada uno). Las imágenes de
-  posts de LinkedIn con pilar Noticia o Pain del calendario pueden ir a `subagente-noticias` /
-  `subagente-pains` si el usuario lo prefiere así.
+Solo si el usuario pide expresamente hacerlo con el Magnific de esta sesión: comprueba
+`account_balance` e invoca `agente-disenador` (1-3 piezas, una vez; más, varios en paralelo con
+unas 4 cada uno), y añade sus filas a `output/registro.csv`.
 
-## 4. Adaptaciones y cambios
+## 3. Cambios y otros formatos
 
-- Misma pieza en otro formato: parte de la imagen ya hecha (`images_expand`, `images_crop`,
-  `images_resize`, o `design_auto_resize`), no generes una nueva.
-- "Cámbiale X": si es un detalle de una zona, `images_retouch`; si es el conjunto, regenera con
-  el prompt corregido y la imagen anterior como referencia.
-- Varias piezas de una misma campaña: la primera aprobada sirve de referencia de estilo
-  (`references`, `type: style`) para las siguientes.
+Van por el mismo camino, como bloques nuevos en el TXT:
 
-## 5. Registrar
+- Misma pieza en otro formato → bloque con `PARTE_DE: <id>` (la rutina adapta la imagen ya
+  hecha con expandir/recortar/redimensionar, no genera otra).
+- "Cámbiale X" → bloque `<id>-v2` con `RETOQUE_DE: <id>` y lo que hay que cambiar en `NOTAS`.
+- Varias piezas de una misma campaña: la primera aprobada va en `REFERENCIAS` de las siguientes.
 
-Añade las filas que devuelvan los agentes a `output/registro.csv` (no borres filas anteriores;
-un cambio sobre una pieza es fila nueva con `id` + `-v2`). Commit y push tras cada encargo
-(mensaje: `Diseño AAAA-MM-DD: N piezas (tema)`), sin `--force` ni `--no-verify`.
-
-## 6. Entregar en el chat
+## 4. Entregar en el chat
 
 Habla como un compañero, sin contar lo que haces por dentro ni nombrar herramientas, archivos o
 commits. Por cada pieza: qué es, en qué formato y el **enlace a la imagen**. Con más de 10
