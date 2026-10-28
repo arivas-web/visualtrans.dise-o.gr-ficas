@@ -1,0 +1,19 @@
+# Estilo libre (base para cualquier pieza sin estilo propio)
+
+Para todo lo que no encaje en Noticias, Pains, cabecera de correo o blog: banners, portadas de
+presentación, carteles de evento o feria, fondos, miniaturas, stories…
+
+## Cómo se construye el prompt
+- En inglés, 25-60 palabras, describiendo: sujeto + detalle concreto + entorno + luz +
+  composición (dónde queda el hueco libre si luego va texto encima).
+- Aplica todo `input/marca/Marca_Visual_Trans.md`: paleta azul/blanca con acentos medidos,
+  luz natural, look limpio, sin logos, sin clichés.
+- Si el usuario describe un estilo concreto (ilustración, 3D, flat, collage, fondo abstracto…),
+  ese estilo manda sobre "fotografía realista", pero la paleta y las prohibiciones se mantienen.
+- Si la pieza lleva un mensaje corto y el usuario quiere el texto dentro de la imagen (cartel,
+  portada), ponlo entre comillas en el prompt y usa un modelo que escriba bien texto (consúltalo
+  con `images_models_list`). Si no lo pide, sin texto.
+- Termina con "No logos, no flags." y, si no lleva texto, "No text, no readable signage."
+
+## Ajustes
+Formato según `input/formatos/Formatos.md`. 1 imagen salvo que pida variantes.

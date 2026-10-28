@@ -1,0 +1,33 @@
+# Cabeceras de correo y newsletter (v1)
+
+Para qué: la franja de imagen que abre un correo de marketing o una newsletter de Visual Trans.
+Se ve pequeña (600 px de ancho) y casi siempre con el titular encima o al lado, puesto después en
+la herramienta de correo. La imagen ambienta; no cuenta la historia entera.
+
+## Cómo se construye el prompt
+- En inglés, 25-50 palabras, empezando por "Wide realistic photograph of" (o "Wide clean
+  composition of" si es textura o fondo).
+- Una escena logística sencilla y reconocible relacionada con el tema del correo (puerto,
+  contenedores, terminal aérea, almacén, camión en autopista europea, oficina de operaciones),
+  o una textura limpia (mapa antiguo difuminado, mar desde arriba, cielo) si el correo es
+  institucional.
+- Sujeto principal a un lado (derecha por defecto) y **espacio negativo amplio y uniforme** al
+  otro lado para el titular: cielo, mar, pared clara o desenfoque.
+- Paleta de marca: azules y blancos dominantes, como mucho un acento (naranja `#F39200` o cian
+  `#00B4E6`). Luz natural de día, colores limpios.
+- Termina siempre con: "Generous empty space on the left for a headline. No text, no logos, no
+  flags, no readable signage."
+
+## Ajustes
+Generar en 21:9 (o 2:1) y recortar a 3:1 (1200×400). `channel: digital`. 1 imagen.
+
+## Evitar
+Escenas cargadas, personas en primer plano, oscuridad, cualquier texto, cualquier metáfora de
+`input/marca/Marca_Visual_Trans.md` > Nunca.
+
+## Ejemplo
+Correo: invitación a un webinar sobre la entrada en vigor del e-CMR.
+Wide realistic photograph of a European truck driving on an empty motorway at early morning,
+seen from a high angle on the right side of the frame, clear pale blue sky filling the rest,
+soft natural light. Generous empty space on the left for a headline. No text, no logos, no
+flags, no readable signage.

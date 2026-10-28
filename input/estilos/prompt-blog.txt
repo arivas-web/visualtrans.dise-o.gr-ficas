@@ -1,0 +1,26 @@
+# Imágenes de blog (v1)
+
+Para qué: la imagen destacada de un artículo del blog (también sirve de imagen OG al compartir
+el enlace) y, si se piden, las imágenes de dentro del artículo.
+
+## Elegir el enfoque según el artículo
+- **Artículo de actualidad o normativa** (e-CMR, ICS2, aranceles, CBAM, Ley 9/2025…) → usa el
+  método de `input/estilos/prompt-noticias.txt` (foto realista de la CONSECUENCIA en el día a
+  día de la logística), pero con el formato de abajo.
+- **Artículo de problema/solución, producto u opinión** (errores en aduanas, trazabilidad,
+  digitalización del transitario…) → usa `input/estilos/prompt-pains.txt` (foto editorial + UNA
+  pieza de interfaz que hace de metáfora, con texto breve en español).
+- **Artículo institucional** (aniversario, equipo, premio) → foto realista de oficina o equipo
+  trabajando, de espaldas o de perfil, luz natural, nada de posados.
+
+## Formato
+- Destacada: generar en 16:9 y recortar a 1200×630 (`channel: og_image`). El motivo, centrado:
+  al compartir se recortan los bordes.
+- Dentro del artículo: 3:2 (1200×800), `channel: digital`.
+- Sin titulares dentro de la imagen (el título ya está en la página). La única excepción es el
+  texto breve de la interfaz en el enfoque Pains.
+
+## Coherencia
+Si se piden varias imágenes para el mismo artículo, misma luz, misma paleta y mismo tipo de
+escena. Genera la primera, y usa esa creación como referencia de estilo (`references` con
+`type: style`) para las siguientes.
