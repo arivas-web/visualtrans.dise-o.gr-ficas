@@ -69,7 +69,8 @@ créditos y dilo claramente.
 ## 5. Registrar
 
 Añade las filas que devuelvan los agentes a `output/registro.csv` (no borres filas anteriores;
-un cambio sobre una pieza es fila nueva con `id` + `-v2`). Commit y push tras cada encargo
+un cambio sobre una pieza es fila nueva con `id` + `-v2`). Commit y push tras cada encargo,
+incluidas las imágenes de `output/imagenes/`
 (mensaje: `Diseño AAAA-MM-DD: N piezas (tema)`), sin `--force` ni `--no-verify`.
 
 ## 6. Entregar en el chat
@@ -79,6 +80,9 @@ commits. Por cada pieza: qué es, en qué formato y el **enlace a la imagen**. C
 piezas, entrégalas en un artifact (galería con filtro por tipo y canal). Termina con algo como
 "¿Te encaja? ¿Cambiamos algo?". Solo si hay un error lo explicas, con el detalle técnico
 necesario.
+
+El enlace es el público de `raw.githubusercontent.com` que devuelve el agente (se abre sin
+cuenta de Magnific); compruébalo tras el push. Nunca entregues el de Magnific.
 
 Si el encargo llega desde Marketing OS (bloque `[Marketing OS]` con "Entrega del resultado"),
 este mensaje se manda por la petición HTTP que indica el bloque, como dice `CLAUDE.md`; si no,

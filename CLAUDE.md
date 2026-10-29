@@ -16,6 +16,10 @@ Agente de diseño gráfico de Visual Trans / Visual MS. Lee `README.md` primero.
   dispararla, confirma con el usuario.
 - Nunca inventes enlaces de imagen ni marques `OK` sin imagen real. Entrega siempre el enlace en
   el chat, no solo rutas. Más de 10 piezas → artifact con galería.
+- El usuario no tiene cuenta de Magnific: el enlace que se entrega es siempre la imagen guardada
+  en `output/imagenes/` y abierta con `raw.githubusercontent.com` (repo público), nunca el de
+  `magnific.com` ni el de `pikaso.cdnpk.net`. Antes de entregarlo, commit y push, y comprueba que
+  el enlace responde 200 (`curl -sI`).
 - Encargos desde **Marketing OS** (el mensaje trae un bloque `[Marketing OS]` con "Entrega del
   resultado"): el chat de Marketing OS solo recibe lo que se manda por esa petición HTTP. La
   respuesta final (entregas, preguntas o errores) se envía SIEMPRE con esa petición, tal cual

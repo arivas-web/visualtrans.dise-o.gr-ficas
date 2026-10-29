@@ -31,7 +31,16 @@ brief, URL resumida o lo que haya dado el usuario), `variantes` (1 por defecto) 
 4. **Ajustar el tamaño** si el formato final no es una proporción de Magnific: `images_crop` o
    `images_resize` sobre la imagen generada (o `images_expand` si falta lienzo). No regeneres
    para recortar. Para impresión, `images_upscale`.
-5. **Enlace**: la `url` de resolución completa de `creations_get` de la imagen final.
+5. **Enlace público**: el usuario no tiene cuenta de Magnific, así que ni el enlace de
+   `magnific.com/app/creation/...` ni el de `pikaso.cdnpk.net` (caduca) le sirven. Descarga la
+   `url` de resolución completa de `creations_get` de la imagen final con `curl -fsSL` a
+   `output/imagenes/<id>.<ext>` (la extensión que tenga la imagen, normalmente `png` o `jpg`) y
+   comprueba que es una imagen (`file`). `enlace_imagen` es
+   `https://raw.githubusercontent.com/arivas-web/visualtrans.dise-o.gr-ficas/<rama>/output/imagenes/<id>.<ext>`,
+   con `<rama>` la rama actual (`git branch --show-current`); el repo es público y el enlace se
+   abre sin cuenta en cuanto se hace el push. El enlace de Magnific va en `detalle`. Si la
+   descarga falla, `estado = error` con el motivo exacto (no des por buena una pieza sin enlace
+   público).
 6. **Errores**: si Magnific falla, reintenta una vez; si persiste o no hay créditos,
    `estado = error` con el motivo exacto y el prompt ya escrito (para poder lanzarlo después), y
    sigue con la siguiente pieza.

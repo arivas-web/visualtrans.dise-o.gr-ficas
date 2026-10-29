@@ -22,7 +22,10 @@ Del orquestador (`/generar-graficas`), del comando `/post-suelto` (repo de Linke
 3. Genera la imagen con el conector de Magnific: `images_generate` (relación de aspecto
    adecuada para LinkedIn, p. ej. 4:5 para el feed; `channel: linkedin_post`), y espera el
    resultado con `creations_wait`. Un solo post = una sola generación (no pidas variantes).
-4. Obtén la `url` de resolución completa con `creations_get`. Esa es `enlace_imagen`.
+4. Obtén la `url` de resolución completa con `creations_get`. En el repo de diseño (el usuario no
+   tiene cuenta de Magnific), descárgala con `curl -fsSL` a `output/imagenes/<ID>.<ext>` y usa como
+   `enlace_imagen` `https://raw.githubusercontent.com/arivas-web/visualtrans.dise-o.gr-ficas/<rama actual>/output/imagenes/<ID>.<ext>`
+   (el de Magnific, en `detalle`). En el repo de LinkedIn, la `url` es `enlace_imagen`.
 5. Si Magnific falla o se quedan sin créditos, reintenta una vez; si persiste, marca
    `estado = error` con el motivo exacto y sigue con el siguiente post.
 
