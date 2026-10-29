@@ -1,0 +1,213 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<style>
+  html, body { margin: 0; width: 1200px; height: 400px; overflow: hidden; background: #0A1A3A; }
+  body { font-family: Inter, sans-serif; position: relative; }
+  .capa { position: absolute; inset: 0; }
+  .escena { position: absolute; inset: 0; perspective: 1100px; perspective-origin: 820px 180px; }
+  .doc, .panel, .fondo-panel {
+    position: absolute; transform-style: preserve-3d; border-radius: 12px;
+  }
+  /* Documentos de origen */
+  .doc {
+    width: 140px; height: 186px; padding: 18px 16px; box-sizing: border-box;
+    background: linear-gradient(150deg, rgba(255,255,255,0.97), rgba(214,234,250,0.9));
+    box-shadow: 0 0 0 1px rgba(255,255,255,0.6), 0 18px 40px rgba(0,10,40,0.55), 0 0 36px rgba(0,180,230,0.35);
+  }
+  .doc .t { height: 9px; width: 60px; border-radius: 5px; background: #2E5590; margin-bottom: 8px; }
+  .doc .s { height: 6px; width: 38px; border-radius: 3px; background: #B8CBE0; margin-bottom: 18px; }
+  .doc .l { height: 6px; border-radius: 3px; background: #D4E0EC; margin: 0 0 13px; position: relative; }
+  .doc .l.on { background: #00B4E6; box-shadow: 0 0 10px #00B4E6, 0 0 22px rgba(0,180,230,0.7); }
+  .factura { left: 560px; top: 96px; transform: rotateY(32deg) rotateX(8deg) rotateZ(-4deg); }
+  .packing { left: 650px; top: 150px; width: 130px; height: 170px; transform: rotateY(30deg) rotateX(8deg) rotateZ(3deg); }
+  /* Haz de escaneo */
+  .haz {
+    position: absolute; left: 540px; top: 184px; width: 270px; height: 3px; border-radius: 3px;
+    background: linear-gradient(90deg, transparent, #7FE3FF 20%, #FFFFFF 50%, #7FE3FF 80%, transparent);
+    box-shadow: 0 0 14px 4px rgba(0,180,230,0.85), 0 0 50px 12px rgba(0,180,230,0.35);
+    transform: rotate(-4deg);
+  }
+  .halo-haz {
+    position: absolute; left: 545px; top: 150px; width: 260px; height: 70px;
+    background: linear-gradient(180deg, transparent, rgba(0,180,230,0.22) 50%, transparent);
+    transform: rotate(-4deg); filter: blur(4px);
+  }
+  /* Panel DUA de cristal, en 3D con capas de profundidad */
+  .fondo-panel {
+    width: 250px; height: 236px; border-radius: 20px;
+    border: 1px solid rgba(127,227,255,0.35);
+    background: linear-gradient(150deg, rgba(0,180,230,0.10), rgba(46,85,144,0.10));
+  }
+  .f1 { left: 858px; top: 56px; transform: rotateY(-24deg) rotateX(6deg) translateZ(-90px); opacity: 0.45; }
+  .f2 { left: 852px; top: 64px; transform: rotateY(-24deg) rotateX(6deg) translateZ(-45px); opacity: 0.7; }
+  .panel {
+    left: 850px; top: 72px; width: 250px; height: 236px; padding: 20px 18px; box-sizing: border-box;
+    border-radius: 20px;
+    background: linear-gradient(150deg, rgba(255,255,255,0.30), rgba(150,210,245,0.12) 55%, rgba(0,180,230,0.10));
+    border: 1.5px solid rgba(160,235,255,0.85);
+    box-shadow: 0 0 0 1px rgba(0,180,230,0.25), 0 0 40px rgba(0,180,230,0.55), inset 0 0 30px rgba(0,180,230,0.25), 0 30px 60px rgba(0,8,30,0.6);
+    transform: rotateY(-24deg) rotateX(6deg);
+    backdrop-filter: blur(6px);
+    overflow: hidden;
+  }
+  .panel::before { /* reflejo de cristal */
+    content: ""; position: absolute; left: -60px; top: -80px; width: 180px; height: 420px;
+    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.28), transparent);
+    transform: rotate(28deg);
+  }
+  .cab { display: flex; justify-content: space-between; align-items: center; margin-bottom: 18px; }
+  .cab .t { height: 10px; width: 70px; border-radius: 5px; background: #FFFFFF; box-shadow: 0 0 10px rgba(255,255,255,0.7); }
+  .ok { width: 34px; height: 14px; border-radius: 7px; background: #2EAA5C; box-shadow: 0 0 12px #2EAA5C, 0 0 24px rgba(46,170,92,0.6); }
+  .fila {
+    height: 28px; border-radius: 8px; margin-bottom: 14px; display: flex; align-items: center; padding: 0 12px; gap: 10px;
+    background: rgba(255,255,255,0.14); border: 1px solid rgba(160,235,255,0.55);
+    box-shadow: 0 0 14px rgba(0,180,230,0.35);
+  }
+  .fila i { display: block; height: 6px; border-radius: 3px; }
+  .fila .a { width: 30px; background: #FFFFFF; opacity: 0.9; }
+  .fila .b { flex: 1; background: rgba(210,235,250,0.55); }
+  .fila .c { width: 24px; background: #00B4E6; box-shadow: 0 0 8px #00B4E6; }
+  .fila .n { width: 12px; height: 12px; border-radius: 50%; background: #F39200; box-shadow: 0 0 10px #F39200, 0 0 22px rgba(243,146,0,0.8); }
+  .fila.rev { border-color: rgba(243,146,0,0.8); box-shadow: 0 0 16px rgba(243,146,0,0.45); }
+  .btn { width: 96px; height: 22px; border-radius: 11px; margin-top: 4px; display: flex; align-items: center; justify-content: center;
+    background: linear-gradient(90deg, #00B4E6, #2E7BD0); box-shadow: 0 0 16px rgba(0,180,230,0.9); }
+  .btn i { display: block; width: 58px; height: 6px; border-radius: 3px; background: #FFFFFF; }
+</style>
+</head>
+<body>
+<!-- Fondo: azul profundo con luz cian -->
+<svg class="capa" width="1200" height="400" viewBox="0 0 1200 400" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="base" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#0A1A3A"/>
+      <stop offset="0.55" stop-color="#11346B"/>
+      <stop offset="1" stop-color="#0D2550"/>
+    </linearGradient>
+    <radialGradient id="luz" cx="820" cy="190" r="420" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#00B4E6" stop-opacity="0.45"/>
+      <stop offset="0.45" stop-color="#1E6FC0" stop-opacity="0.18"/>
+      <stop offset="1" stop-color="#0A1A3A" stop-opacity="0"/>
+    </radialGradient>
+    <radialGradient id="luzIzq" cx="160" cy="80" r="420" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#2E5590" stop-opacity="0.55"/>
+      <stop offset="1" stop-color="#2E5590" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="sueloFade" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#fff" stop-opacity="0"/>
+      <stop offset="0.35" stop-color="#fff" stop-opacity="1"/>
+      <stop offset="1" stop-color="#fff" stop-opacity="0.2"/>
+    </linearGradient>
+    <mask id="sueloMask"><rect x="0" y="250" width="1200" height="150" fill="url(#sueloFade)"/></mask>
+    <filter id="glow" x="-50%" y="-50%" width="200%" height="200%">
+      <feGaussianBlur stdDeviation="3" result="b"/>
+      <feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+    <filter id="bokeh"><feGaussianBlur stdDeviation="2.5"/></filter>
+    <filter id="blurGrande"><feGaussianBlur stdDeviation="18"/></filter>
+    <linearGradient id="flujo" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#7FE3FF" stop-opacity="0.2"/>
+      <stop offset="1" stop-color="#7FE3FF" stop-opacity="1"/>
+    </linearGradient>
+  </defs>
+
+  <rect width="1200" height="400" fill="url(#base)"/>
+  <rect width="1200" height="400" fill="url(#luzIzq)"/>
+  <rect width="1200" height="400" fill="url(#luz)"/>
+
+  <!-- Puerto en siluetas tenues al fondo -->
+  <g opacity="0.22" stroke="#7FB8E6" stroke-width="4" fill="none" stroke-linecap="round">
+    <path d="M470 262 V120 M500 262 V120 M430 120 H570 M470 140 L500 120 M500 140 L470 120"/>
+    <path d="M1150 262 V140 M1180 262 V140 M1110 140 H1200"/>
+  </g>
+  <g opacity="0.18" fill="#7FB8E6">
+    <rect x="520" y="244" width="52" height="16"/><rect x="520" y="226" width="52" height="16"/>
+    <rect x="576" y="244" width="52" height="16"/><rect x="1080" y="244" width="52" height="16"/>
+  </g>
+
+  <!-- Suelo de rejilla en perspectiva -->
+  <g mask="url(#sueloMask)" stroke="#00B4E6" stroke-opacity="0.35" stroke-width="1">
+    <path d="M0 262 H1200 M0 276 H1200 M0 294 H1200 M0 318 H1200 M0 350 H1200 M0 392 H1200"/>
+    <path d="M820 262 L820 400 M780 262 L700 400 M740 262 L580 400 M700 262 L460 400 M660 262 L340 400 M620 262 L220 400 M580 262 L100 400
+             M860 262 L940 400 M900 262 L1060 400 M940 262 L1180 400 M980 262 L1300 400"/>
+  </g>
+  <rect x="380" y="259" width="820" height="2" fill="#7FE3FF" opacity="0.55" filter="url(#glow)"/>
+
+  <!-- Reflejo bajo el panel -->
+  <ellipse cx="1000" cy="320" rx="170" ry="20" fill="#00B4E6" opacity="0.35" filter="url(#blurGrande)"/>
+  <ellipse cx="660" cy="332" rx="130" ry="16" fill="#00B4E6" opacity="0.28" filter="url(#blurGrande)"/>
+
+  <!-- Bokeh -->
+  <g filter="url(#bokeh)" fill="#7FE3FF">
+    <circle cx="430" cy="60" r="5" opacity="0.35"/><circle cx="610" cy="40" r="7" opacity="0.25"/>
+    <circle cx="760" cy="70" r="4" opacity="0.5"/><circle cx="1170" cy="60" r="8" opacity="0.25"/>
+    <circle cx="840" cy="340" r="5" opacity="0.3"/><circle cx="520" cy="330" r="4" opacity="0.35"/>
+    <circle cx="300" cy="300" r="6" opacity="0.18"/><circle cx="1150" cy="200" r="4" opacity="0.4"/>
+  </g>
+</svg>
+
+<div class="escena">
+  <div class="halo-haz"></div>
+  <div class="doc factura">
+    <div class="t"></div><div class="s"></div>
+    <div class="l" style="width:100%"></div>
+    <div class="l on" style="width:100%"></div>
+    <div class="l" style="width:86%"></div>
+    <div class="l on" style="width:100%"></div>
+    <div class="l" style="width:70%"></div>
+  </div>
+  <div class="doc packing">
+    <div class="t" style="width:52px"></div><div class="s"></div>
+    <div class="l on" style="width:100%"></div>
+    <div class="l" style="width:100%"></div>
+    <div class="l on" style="width:90%"></div>
+    <div class="l" style="width:100%"></div>
+  </div>
+  <div class="haz"></div>
+
+  <div class="fondo-panel f1"></div>
+  <div class="fondo-panel f2"></div>
+  <div class="panel">
+    <div class="cab"><div class="t"></div><div class="ok"></div></div>
+    <div class="fila"><i class="a"></i><i class="b"></i><i class="c"></i></div>
+    <div class="fila"><i class="a"></i><i class="b" style="flex:0.8"></i><i class="c"></i></div>
+    <div class="fila rev"><i class="a"></i><i class="b" style="flex:0.9"></i><i class="n"></i></div>
+    <div class="btn"><i></i></div>
+  </div>
+</div>
+
+<!-- Flujo de datos: partículas que viajan de los documentos al DUA -->
+<svg class="capa" width="1200" height="400" viewBox="0 0 1200 400" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <filter id="glow2" x="-100%" y="-100%" width="300%" height="300%">
+      <feGaussianBlur stdDeviation="2.5" result="b"/>
+      <feMerge><feMergeNode in="b"/><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+    <linearGradient id="fl" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#7FE3FF" stop-opacity="0.1"/>
+      <stop offset="1" stop-color="#7FE3FF" stop-opacity="0.9"/>
+    </linearGradient>
+  </defs>
+  <g fill="none" stroke="url(#fl)" stroke-width="1.6" stroke-linecap="round" filter="url(#glow2)">
+    <path d="M712 150 C 780 120, 840 120, 876 134"/>
+    <path d="M770 205 C 820 192, 860 186, 876 180"/>
+    <path d="M776 258 C 830 258, 870 236, 876 226"/>
+  </g>
+  <g fill="#E6FAFF" filter="url(#glow2)">
+    <circle cx="760" cy="128" r="2.2"/><circle cx="812" cy="120" r="2.8"/><circle cx="862" cy="124" r="2.2"/>
+    <circle cx="805" cy="196" r="2.4"/><circle cx="850" cy="187" r="3"/>
+    <circle cx="820" cy="254" r="2.2"/><circle cx="868" cy="238" r="2.8"/>
+    <circle cx="876" cy="134" r="3.5"/><circle cx="876" cy="180" r="3.5"/><circle cx="876" cy="226" r="3.5"/>
+  </g>
+  <!-- Destellos -->
+  <g fill="#FFFFFF" filter="url(#glow2)">
+    <path d="M1088 76 l3 -13 l3 13 l13 3 l-13 3 l-3 13 l-3 -13 l-13 -3 z" opacity="0.95"/>
+    <path d="M574 100 l2 -8 l2 8 l8 2 l-8 2 l-2 8 l-2 -8 l-8 -2 z" opacity="0.85"/>
+    <path d="M800 186 l2 -7 l2 7 l7 2 l-7 2 l-2 7 l-2 -7 l-7 -2 z" opacity="0.9"/>
+  </g>
+  <!-- Destello de lente horizontal sutil -->
+  <rect x="980" y="75" width="280" height="1.5" fill="#BFF1FF" opacity="0.5" filter="url(#glow2)"/>
+</svg>
+</body>
+</html>
