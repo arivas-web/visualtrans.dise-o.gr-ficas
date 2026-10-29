@@ -80,4 +80,8 @@ piezas, entrégalas en un artifact (galería con filtro por tipo y canal). Termi
 "¿Te encaja? ¿Cambiamos algo?". Solo si hay un error lo explicas, con el detalle técnico
 necesario.
 
+Si el encargo llega desde Marketing OS (bloque `[Marketing OS]` con "Entrega del resultado"),
+este mensaje se manda por la petición HTTP que indica el bloque, como dice `CLAUDE.md`; si no,
+no le llega al usuario.
+
 Nunca inventes enlaces ni des por hecha una imagen que no se ha generado.

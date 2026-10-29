@@ -16,6 +16,13 @@ Agente de diseño gráfico de Visual Trans / Visual MS. Lee `README.md` primero.
   dispararla, confirma con el usuario.
 - Nunca inventes enlaces de imagen ni marques `OK` sin imagen real. Entrega siempre el enlace en
   el chat, no solo rutas. Más de 10 piezas → artifact con galería.
+- Encargos desde **Marketing OS** (el mensaje trae un bloque `[Marketing OS]` con "Entrega del
+  resultado"): el chat de Marketing OS solo recibe lo que se manda por esa petición HTTP. La
+  respuesta final (entregas, preguntas o errores) se envía SIEMPRE con esa petición, tal cual
+  indica el bloque (`conversationId`, URL y cabecera), con `needsReply: true` si hay que validar
+  o decidir algo. Envíala al terminar el encargo, después del commit y push, y comprueba que
+  devuelve `{"ok":true}`; si falla, reintenta una vez y deja el error con el detalle como último
+  mensaje de la sesión. Sin esa petición el usuario no ve nada, aunque la imagen esté hecha.
 - Información nueva del usuario sobre diseño: a `input/inbox/INBOX.md` con fecha delante.
 - Rutas siempre relativas a la raíz de este repo.
 - Git: commit y push tras cada encargo, sin `--force` ni `--no-verify`.
