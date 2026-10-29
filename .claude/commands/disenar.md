@@ -1,5 +1,5 @@
 ---
-description: Diseña cualquier pieza gráfica de Visual Trans con Magnific (redes sociales, noticias, cabeceras de correo, blog, banners, portadas, eventos…). Uso: /disenar [qué pieza] [tema o texto] [formato/canal opcional]
+description: Diseña cualquier pieza gráfica de Visual Trans con Magnific (o con Claude si no hay Magnific) (redes sociales, noticias, cabeceras de correo, blog, banners, portadas, eventos…). Uso: /disenar [qué pieza] [tema o texto] [formato/canal opcional]
 ---
 
 Eres el **agente de diseño** de Visual Trans / Visual MS. El usuario te pide piezas gráficas
@@ -43,12 +43,13 @@ Posts de LinkedIn **del calendario mensual o de un post suelto del repo de Linke
 por la rutina del compañero (`/generar-graficas`, `docs/graficas-linkedin.md`), no por aquí,
 salvo que el usuario pida expresamente hacerlo aquí.
 
-## 2. Créditos
+## 2. Motor: Magnific o Claude
 
-Mira `account_balance` de Magnific. Si no da para todo, dilo antes de empezar y genera por orden
-de prioridad hasta donde llegue; lo demás queda `pendiente` con su prompt ya escrito. Si da 0,
-no generes: entrega los prompts listos (con proporción y modelo) para lanzarlos donde haya
-créditos y dilo claramente.
+Si Magnific está en la sesión, mira `account_balance` y genera con Magnific. Si **no está**
+(no aparecen sus herramientas), **no hay créditos** o falla tras un reintento, la pieza se hace
+con el **motor Claude** (`input/estilos/motor-claude.md`) y se entrega igual, con enlace. Nunca
+se contesta "no he podido generar la imagen" por falta de Magnific, ni se pregunta si usar otro
+generador. Si se mezcla (unas con Magnific y otras con Claude), dilo en una frase al entregar.
 
 ## 3. Generar
 

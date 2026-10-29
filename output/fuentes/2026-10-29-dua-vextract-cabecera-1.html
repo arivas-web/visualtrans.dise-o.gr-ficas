@@ -1,0 +1,141 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<style>
+  html, body { margin: 0; width: 1200px; height: 400px; overflow: hidden; }
+  body { font-family: Inter, sans-serif; }
+  svg { display: block; }
+</style>
+</head>
+<body>
+<svg width="1200" height="400" viewBox="0 0 1200 400" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="cielo" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#EAF4FB"/>
+      <stop offset="0.62" stop-color="#F7FBFE"/>
+      <stop offset="1" stop-color="#FFFFFF"/>
+    </linearGradient>
+    <linearGradient id="mar" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#CFE6F4"/>
+      <stop offset="1" stop-color="#E9F4FA"/>
+    </linearGradient>
+    <linearGradient id="vidrio" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#FFFFFF" stop-opacity="0.92"/>
+      <stop offset="1" stop-color="#FFFFFF" stop-opacity="0.72"/>
+    </linearGradient>
+    <linearGradient id="flujo" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#00B4E6" stop-opacity="0.15"/>
+      <stop offset="1" stop-color="#00B4E6" stop-opacity="0.7"/>
+    </linearGradient>
+    <filter id="sombra" x="-20%" y="-20%" width="140%" height="150%">
+      <feDropShadow dx="0" dy="10" stdDeviation="14" flood-color="#2E5590" flood-opacity="0.14"/>
+    </filter>
+    <filter id="sombraSuave" x="-20%" y="-20%" width="140%" height="150%">
+      <feDropShadow dx="0" dy="5" stdDeviation="7" flood-color="#2E5590" flood-opacity="0.12"/>
+    </filter>
+  </defs>
+
+  <!-- Fondo: cielo limpio y franja de mar -->
+  <rect width="1200" height="400" fill="url(#cielo)"/>
+  <rect y="300" width="1200" height="100" fill="url(#mar)"/>
+
+  <!-- Puerto al fondo, muy desaturado (zona derecha) -->
+  <g opacity="0.75">
+    <!-- grúas -->
+    <g stroke="#9DB8D3" stroke-width="5" fill="none" stroke-linecap="round">
+      <path d="M520 300 V120 M556 300 V120 M470 120 H640 M520 142 L556 120 M556 142 L520 120 M600 120 V138"/>
+      <path d="M1080 300 V130 M1120 300 V130 M1060 130 H1185 M1080 150 L1120 130 M1120 150 L1080 130"/>
+    </g>
+    <!-- pilas de contenedores -->
+    <g>
+      <rect x="574" y="281" width="62" height="19" fill="#B9CFE3"/><rect x="574" y="262" width="62" height="19" fill="#9FD8EE"/><rect x="760" y="262" width="62" height="19" fill="#B9CFE3"/>
+      <rect x="760" y="281" width="62" height="19" fill="#A9C3DB"/>
+      <rect x="826" y="281" width="62" height="19" fill="#F7C98A"/>
+      <rect x="826" y="262" width="62" height="19" fill="#B9CFE3"/>
+      <rect x="826" y="243" width="62" height="19" fill="#A9C3DB"/>
+      <rect x="980" y="281" width="62" height="19" fill="#B9CFE3"/>
+      <rect x="980" y="262" width="62" height="19" fill="#9FD8EE"/>
+      <rect x="1046" y="281" width="62" height="19" fill="#A9C3DB"/>
+      <rect x="1112" y="281" width="62" height="19" fill="#B9CFE3"/>
+      <rect x="1112" y="262" width="62" height="19" fill="#A9C3DB"/>
+    </g>
+    <rect x="440" y="298" width="760" height="4" fill="#9DB8D3"/>
+  </g>
+
+  <!-- Factura comercial -->
+  <g filter="url(#sombraSuave)" transform="rotate(-6 640 200)">
+    <rect x="575" y="98" width="150" height="196" rx="10" fill="#FFFFFF"/>
+    <rect x="593" y="118" width="62" height="9" rx="4.5" fill="#2E5590"/>
+    <rect x="593" y="134" width="40" height="6" rx="3" fill="#C9D7E6"/>
+    <g fill="#DCE6F0">
+      <rect x="593" y="160" width="114" height="6" rx="3"/>
+      <rect x="593" y="180" width="114" height="6" rx="3"/>
+      <rect x="593" y="200" width="114" height="6" rx="3"/>
+      <rect x="593" y="220" width="114" height="6" rx="3"/>
+      <rect x="593" y="240" width="114" height="6" rx="3"/>
+    </g>
+    <!-- líneas leídas -->
+    <rect x="588" y="155" width="124" height="16" rx="4" fill="#00B4E6" opacity="0.16"/>
+    <rect x="588" y="195" width="124" height="16" rx="4" fill="#00B4E6" opacity="0.16"/>
+    <rect x="593" y="266" width="50" height="9" rx="4.5" fill="#2E5590" opacity="0.8"/>
+  </g>
+
+  <!-- Packing list -->
+  <g filter="url(#sombraSuave)" transform="rotate(5 700 250)">
+    <rect x="640" y="150" width="140" height="180" rx="10" fill="#FFFFFF"/>
+    <rect x="657" y="168" width="54" height="9" rx="4.5" fill="#2E5590" opacity="0.85"/>
+    <g fill="#DCE6F0">
+      <rect x="657" y="194" width="22" height="6" rx="3"/><rect x="685" y="194" width="78" height="6" rx="3"/>
+      <rect x="657" y="214" width="22" height="6" rx="3"/><rect x="685" y="214" width="78" height="6" rx="3"/>
+      <rect x="657" y="234" width="22" height="6" rx="3"/><rect x="685" y="234" width="78" height="6" rx="3"/>
+      <rect x="657" y="254" width="22" height="6" rx="3"/><rect x="685" y="254" width="78" height="6" rx="3"/>
+      <rect x="657" y="274" width="22" height="6" rx="3"/><rect x="685" y="274" width="78" height="6" rx="3"/>
+    </g>
+    <rect x="652" y="209" width="116" height="16" rx="4" fill="#00B4E6" opacity="0.16"/>
+    <rect x="652" y="249" width="116" height="16" rx="4" fill="#00B4E6" opacity="0.16"/>
+  </g>
+
+  <!-- Flujo de datos de los documentos al DUA (trazos suaves, sin flechas) -->
+  <g fill="none" stroke="url(#flujo)" stroke-width="2.5" stroke-linecap="round" stroke-dasharray="2 9">
+    <path d="M735 175 C 800 160, 830 150, 880 140"/>
+    <path d="M782 222 C 830 210, 850 200, 880 196"/>
+    <path d="M780 262 C 830 262, 850 254, 880 252"/>
+  </g>
+  <g fill="#00B4E6">
+    <circle cx="880" cy="140" r="4"/>
+    <circle cx="880" cy="196" r="4"/>
+    <circle cx="880" cy="252" r="4"/>
+  </g>
+
+  <!-- Panel DUA (glassmorphism) -->
+  <g filter="url(#sombra)">
+    <rect x="870" y="78" width="270" height="244" rx="18" fill="url(#vidrio)" stroke="#FFFFFF" stroke-width="1.5"/>
+  </g>
+  <rect x="894" y="100" width="70" height="10" rx="5" fill="#2E5590"/>
+  <rect x="1084" y="98" width="34" height="14" rx="7" fill="#2EAA5C" opacity="0.9"/>
+
+  <!-- Partidas generadas -->
+  <g>
+    <rect x="894" y="128" width="222" height="28" rx="8" fill="#FFFFFF" stroke="#E1EAF3"/>
+    <rect x="906" y="139" width="34" height="6" rx="3" fill="#2E5590" opacity="0.75"/>
+    <rect x="950" y="139" width="92" height="6" rx="3" fill="#C9D7E6"/>
+    <rect x="1078" y="139" width="26" height="6" rx="3" fill="#00B4E6"/>
+
+    <rect x="894" y="184" width="222" height="28" rx="8" fill="#FFFFFF" stroke="#E1EAF3"/>
+    <rect x="906" y="195" width="34" height="6" rx="3" fill="#2E5590" opacity="0.75"/>
+    <rect x="950" y="195" width="70" height="6" rx="3" fill="#C9D7E6"/>
+    <rect x="1078" y="195" width="26" height="6" rx="3" fill="#00B4E6"/>
+
+    <rect x="894" y="240" width="222" height="28" rx="8" fill="#FFFFFF" stroke="#E1EAF3"/>
+    <rect x="906" y="251" width="34" height="6" rx="3" fill="#2E5590" opacity="0.75"/>
+    <rect x="950" y="251" width="84" height="6" rx="3" fill="#C9D7E6"/>
+    <!-- punto a revisar, acento naranja -->
+    <circle cx="1091" cy="254" r="6" fill="#F39200"/>
+  </g>
+  <!-- Botón confirmar -->
+  <rect x="894" y="286" width="96" height="20" rx="10" fill="#2E5590"/>
+  <rect x="912" y="293" width="60" height="6" rx="3" fill="#FFFFFF" opacity="0.9"/>
+</svg>
+</body>
+</html>

@@ -14,6 +14,8 @@ Agente de diseño gráfico de Visual Trans / Visual MS. Lee `README.md` primero.
   (copia del repo `arivas-web/visualtrans.linkedin`; detalle en `docs/graficas-linkedin.md`).
   En producción lo corre la rutina `agente-graficas` del compañero, con sus créditos. Antes de
   dispararla, confirma con el usuario.
+- Sin Magnific (no conectado, sin créditos o caído) → motor Claude (`input/estilos/motor-claude.md`):
+  se hace la pieza y se entrega, nunca se responde con un error por eso.
 - Nunca inventes enlaces de imagen ni marques `OK` sin imagen real. Entrega siempre el enlace en
   el chat, no solo rutas. Más de 10 piezas → artifact con galería.
 - Información nueva del usuario sobre diseño: a `input/inbox/INBOX.md` con fecha delante.
